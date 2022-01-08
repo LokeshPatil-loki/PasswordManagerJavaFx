@@ -1,0 +1,61 @@
+.root{
+    -fx-font-family: "Quando";
+}
+
+.anchor-pane{
+   -fx-background-color: #0C475A;
+}
+#Title{
+    -fx-font-family: "Quando";
+    -fx-font-size: 72px;
+    -fx-alignment: CENTER;
+}
+
+.Container{
+    width: 412px;
+    height: 398px;
+    -fx-background-color: #126A87;
+    -fx-background-radius: 22px;
+}
+
+.text-field,password-field{
+    -fx-background-color: #0C475A;
+    -fx-border-width: 2px;
+    -fx-border-color: #CCE7F1;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 9px;
+    -fx-text-fill: #C7F1FF;
+}
+
+.InputLabel{
+    -fx-fill: #CCE7F1;
+    -fx-font-size: 15px;
+}
+
+.SubmitButton{
+    -fx-background-color: #126A87;
+    -fx-border-width: 2px;
+    -fx-border-color: #B3DAE8;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 9px;
+    -fx-text-fill: #CCE7F1;
+}
+
+.SubmitButton: hover{
+    -fx-background-color: #188db4;
+    -fx-text-fill: #CCE7F1;
+}
+
+.Link{
+    -fx-fill: #96C6D6;
+    -fx-cursor: hand;
+}
+
+.LeftPane{
+    -fx-background-color: #126A87;
+}
+
+.RightPane{
+   -fx-background-color: #0C475A;
+}
+
