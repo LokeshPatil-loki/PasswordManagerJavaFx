@@ -20,8 +20,8 @@
 
 .text-field,password-field{
     -fx-background-color: #0C475A;
-    -fx-border-width: 2px;
-    -fx-border-color: #CCE7F1;
+    -fx-border-width: 3px;
+    -fx-border-color: #519BB2;
     -fx-background-radius: 9px;
     -fx-border-radius: 9px;
     -fx-text-fill: #C7F1FF;
@@ -29,15 +29,24 @@
 
 .InputLabel{
     -fx-fill: #CCE7F1;
-    -fx-font-size: 15px;
+    -fx-text-fill: #CCE7F1;
+    -fx-font-size: 16px;
 }
 
-.SubmitButton{
-    -fx-background-color: #126A87;
-    -fx-border-width: 2px;
-    -fx-border-color: #B3DAE8;
-    -fx-background-radius: 9px;
-    -fx-border-radius: 9px;
+.SubmitButton, .toggle-button{
+    -fx-background-color: #0C475A;
+    -fx-border-width: 3px;
+    -fx-border-color: #519BB2;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: #CCE7F1;
+    -fx-font-size: 18px;
+    -fx-cursor: hand;
+
+}
+
+.toggle-button:selected{
+    -fx-background-color: #188db4;
     -fx-text-fill: #CCE7F1;
 }
 
@@ -59,3 +68,23 @@
    -fx-background-color: #0C475A;
 }
 
+.contentPane{
+    -fx-background-color: #126A87;
+    -fx-background-radius: 33px;
+    -fx-border-radius: 33px;
+}
+
+.list-view, .list-cell {
+      -fx-background-color: #126A87;
+}
+
+.list-cell{
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #0C475A;
+    -fx-text-fill: #E8F3F8;
+    -fx-font-size: 20px;
+}
+
+.list-cell:empty {
+    -fx-border-width: 0px;
+}

@@ -20,8 +20,8 @@
 
 .text-field,password-field{
     -fx-background-color: #0C475A;
-    -fx-border-width: 2px;
-    -fx-border-color: #CCE7F1;
+    -fx-border-width: 3px;
+    -fx-border-color: #519BB2;
     -fx-background-radius: 9px;
     -fx-border-radius: 9px;
     -fx-text-fill: #C7F1FF;
@@ -29,16 +29,18 @@
 
 .InputLabel{
     -fx-fill: #CCE7F1;
-    -fx-font-size: 15px;
+    -fx-text-fill: #CCE7F1;
+    -fx-font-size: 16px;
 }
 
 .SubmitButton{
-    -fx-background-color: #126A87;
-    -fx-border-width: 2px;
-    -fx-border-color: #B3DAE8;
-    -fx-background-radius: 9px;
-    -fx-border-radius: 9px;
+    -fx-background-color: #0C475A;
+    -fx-border-width: 3px;
+    -fx-border-color: #519BB2;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
     -fx-text-fill: #CCE7F1;
+    -fx-font-size: 18px;
 }
 
 .SubmitButton: hover{
@@ -59,3 +61,16 @@
    -fx-background-color: #0C475A;
 }
 
+.contentPane{
+    -fx-background-color: #126A87;
+    -fx-background-radius: 33px;
+    -fx-border-radius: 33px;
+}
+
+.list - view {
+      -fx - background - color: #232323;
+}
+
+.list-cell:empty {
+    visibility:hidden;
+}

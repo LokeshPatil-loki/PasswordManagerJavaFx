@@ -26,10 +26,20 @@ public class LoginController extends AuthController{
             User user = Main.passwordManager.login(username,password);
             if(user != null){
                 Main.loggedInUser = user;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Login");
-                alert.setHeaderText("Login in successfully");
-                alert.show();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Login");
+//                alert.setHeaderText("Login in successfully");
+//                alert.show();
+                try {
+                    root = FXMLLoader.load(getClass().getResource("ManagerUI.fxml"));
+                    scene = new Scene(root);
+                    scene.getStylesheets().add("stylesheet.css");
+                    Main.stage.setScene(scene);
+                    Main.stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.err.println(e.getMessage());
+                }
             }else {
                 Main.loggedInUser = null;
                 Main.ErrorAlert("Login","Incorrect Username / Password");

@@ -7,26 +7,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane style="-fx-background-color: #0C475A;" prefHeight="493.0" prefWidth="834.0"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.passwordmanager.LoginController">
+<AnchorPane prefHeight="493.0" prefWidth="834.0" style="-fx-background-color: #0C475A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.passwordmanager.LoginController">
    <children>
 <!--      style="-fx-background-color: #126A87;"-->
-      <Pane styleClass="LeftPane" layoutY="-1.0" prefHeight="493.0" prefWidth="353.0" >
+      <Pane layoutY="-1.0" prefHeight="493.0" prefWidth="353.0" styleClass="LeftPane">
          <children>
             <Text fx:id="Title" fill="WHITE" layoutX="24.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="303.7003187019589">
             </Text>
          </children>
       </Pane>
 <!--      style="-fx-background-color: #0C475A;"-->
-      <Pane styleClass="RegisterPane, RightPane" layoutX="353.0" prefHeight="493.0" prefWidth="480.0" >
+      <Pane layoutX="353.0" prefHeight="493.0" prefWidth="480.0" styleClass="RegisterPane, RightPane">
          <children>
             <Pane layoutX="67.0" layoutY="77.0" prefHeight="340.0" prefWidth="346.0" styleClass="Container">
                <children>
-                  <TextField fx:id="tfUsername" layoutX="31.0" layoutY="77.0" prefHeight="37.0" prefWidth="285.0" styleClass="TextInput" />
-                  <Text layoutX="31.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InputLabel" text="Username" />
-                  <PasswordField fx:id="tfPassword" layoutX="31.0" layoutY="166.0" prefHeight="37.0" prefWidth="285.0" styleClass="TextInput" />
-                  <Text layoutX="31.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InputLabel" text="Password" />
-                  <Button fx:id="btnSubmit" layoutX="31.0" layoutY="235.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="285.0" styleClass="SubmitButton" text="Login" />
-                  <Text layoutX="16.0" layoutY="295.0" onMouseClicked="#redirect" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Link" text="Don't have an account ?" textAlignment="CENTER" wrappingWidth="314.031494140625" />
+                  <TextField fx:id="tfUsername" layoutX="31.0" layoutY="81.0" prefHeight="37.0" prefWidth="285.0" styleClass="TextInput" />
+                  <Text layoutX="31.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InputLabel" text="Username" />
+                  <PasswordField fx:id="tfPassword" layoutX="31.0" layoutY="163.0" prefHeight="37.0" prefWidth="285.0" styleClass="TextInput" />
+                  <Text layoutX="31.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="InputLabel" text="Password" />
+                  <Button fx:id="btnSubmit" layoutX="31.0" layoutY="228.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="285.0" styleClass="SubmitButton" text="Login" />
+                  <Text layoutX="16.0" layoutY="292.0" onMouseClicked="#redirect" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Link" text="Don't have an account ?" textAlignment="CENTER" wrappingWidth="314.031494140625" />
                </children></Pane>
          </children>
       </Pane>

@@ -68,13 +68,33 @@ public class PasswordManager {
     }
 
     public Account addAccount(Account account){
-        String query = "Insert into Password values(?,?,?,?)";
+        String query = "Insert into Password(userid,acc_name,username,password) values(?,?,?,?)";
         try {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setInt(1,account.getUserid());
             pst.setString(2,account.getAc_name());
             pst.setString(3,account.getUsername());
             pst.setString(4,account.getPassword());
+            int rowAffected = pst.executeUpdate();
+            if(rowAffected > 0 ){
+                System.out.println("Account added to password manager successfully!");
+                return account;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Account updateAccount(Account account){
+        String query = "Update Password set username = ?, password = ? where userid = ? and acc_name = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1,account.getUsername());
+            pst.setString(2,account.getPassword());
+            pst.setInt(3,account.getUserid());
+            pst.setString(4,account.getAc_name());
             int rowAffected = pst.executeUpdate();
             if(rowAffected > 0 ){
                 System.out.println("Account added to password manager successfully!");
@@ -100,7 +120,7 @@ public class PasswordManager {
         ArrayList<Account> accountArrayList = new ArrayList<Account>();
         try {
             Statement statement = con.createStatement();
-            String query = "Select * from Password where userid = " + user.getUserid() + " order by acc_name desc";
+            String query = "Select * from Password where userid = " + user.getUserid() + " order by id desc";
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
                 Account account = new Account(

@@ -18,6 +18,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         try {
             passwordManager = new PasswordManager("loki","doloris","localhost:3306","PasswordManager");
+//            Main.loggedInUser =  passwordManager.login("loki","lokesh");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("ManagerUI.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("stylesheet.css");
             stage = primaryStage;
@@ -43,7 +44,7 @@ public class Main extends Application {
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
             primaryStage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
