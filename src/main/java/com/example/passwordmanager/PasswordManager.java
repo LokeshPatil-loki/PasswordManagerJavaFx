@@ -134,4 +134,25 @@ public class PasswordManager {
         return accountArrayList;
     }
 
+    public ArrayList<Account> searchAccounts(User user, String searchTerm){
+        ArrayList<Account> accountArrayList = new ArrayList<Account>();
+        try {
+            Statement statement = con.createStatement();
+            String query = "Select * from Password where userid = " + user.getUserid() + " and acc_name like '%" + searchTerm.trim()  +  "%' order by id desc";
+            System.out.println(query);
+//            String query = "Select * from Password where userid = " + user.getUserid() + " order by id desc";
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()){
+                Account account = new Account(
+                        rs.getInt(1),rs.getString(2),
+                        rs.getString(3),rs.getString(4));
+                System.out.println(account.getAc_name());
+                accountArrayList.add(account);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accountArrayList;
+    }
+
 }

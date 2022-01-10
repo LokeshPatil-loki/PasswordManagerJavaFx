@@ -7,13 +7,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static javafx.scene.input.KeyCode.*;
 
 public class ManagerUI implements Initializable {
 
@@ -21,16 +28,19 @@ public class ManagerUI implements Initializable {
     private ListView<String> accountListView;
 
     @FXML
-    private TextField tfAccountName, tfUsername, tfPassword, tfConfirmPassword;
+    private TextField tfAccountName, tfUsername, tfPassword, tfConfirmPassword, tfSearch;
 
     @FXML
     private PasswordField pfPassword, pfConfirmPassword;
 
     @FXML
-    private Button btnSubmit, btnAddCancel;
+    private Button btnSubmit, btnAddCancel,btnDelete;
 
     @FXML
     private ToggleButton btnToggleEdit;
+
+    @FXML
+    private Pane backgroundPane;
 
     private ArrayList<String> accountNameList = new ArrayList<String>();
 
@@ -50,7 +60,9 @@ public class ManagerUI implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         disableFields();
+        ContextMenu contextMenu = new ContextMenu(new MenuItem("Delete"));
         getAllAccounts();
+        ImageView imageView = new ImageView();
         try {
             accountListView.getItems().addAll(accountNameList);
         }catch (Exception e){
@@ -59,8 +71,8 @@ public class ManagerUI implements Initializable {
         accountListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                int selectedIndex = accountListView.getSelectionModel().getSelectedIndex();
                 if(mouseEvent.getButton() == MouseButton.PRIMARY){
-                    int selectedIndex = accountListView.getSelectionModel().getSelectedIndex();
                     Account selectedAccount = list.get(selectedIndex);
                     isEditable = false;
                     enableFields();
@@ -70,44 +82,17 @@ public class ManagerUI implements Initializable {
                     btnAddCancel.setText("Cancel");
                     btnSubmit.setDisable(true);
                     btnToggleEdit.setVisible(true);
-                    btnSubmit.setLayoutX(183);
-                    btnSubmit.setPrefWidth(180);
+                    btnDelete.setVisible(true);
+                    backgroundPane.setVisible(true);
+                    btnSubmit.setLayoutX(235);
+                    btnSubmit.setPrefWidth(128);
                     btnSubmit.setText("Update");
+                }else if(mouseEvent.getButton() == MouseButton.SECONDARY){
+//                    accountListView.setOnConte
+//                    System.out.println(accountNameList.get(selectedIndex));
                 }
             }
         });
-//        accountListView.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<String>(){
-//
-//            @Override
-//            public void onChanged(Change<? extends String> change) {
-//                int selectedIndex = accountListView.getSelectionModel().getSelectedIndex();
-//                Account selectedAccount = list.get(selectedIndex);
-//                isEditable = false;
-//                enableFields();
-////                tfUsername.setEditable(false);
-////                tfAccountName.setEditable(false);
-////                tfPassword.setEditable(false);
-////                tfConfirmPassword.setEditable(false);
-////                pfPassword.setEditable(false);
-////                pfConfirmPassword.setEditable(false);
-//
-////                pfConfirmPassword.setVisible(false);
-////                pfPassword.setVisible(false);
-////                tfConfirmPassword.setVisible(true);
-////                tfPassword.setVisible(true);
-//                toggleEditing();
-//                showPass();
-////                tfAccountName.setText(selectedAccount.getAc_name());
-////                tfUsername.setText(selectedAccount.getUsername());
-////                pfPassword.setText(selectedAccount.getPassword());
-////                pfConfirmPassword.setText(selectedAccount.getPassword());
-////                tfPassword.setText(selectedAccount.getPassword());
-////                tfConfirmPassword.setText(selectedAccount.getPassword());
-//                populateFields(selectedAccount);
-//                btnAddCancel.setText("Cancel");
-//                btnSubmit.setDisable(true);
-//            }
-//        });
     }
 
     public void saveAccount(ActionEvent event){
@@ -124,9 +109,11 @@ public class ManagerUI implements Initializable {
                     Account result = Main.passwordManager.addAccount(account);
                     if(result != null){
                         clearFields();
-                        accountListView.getItems().removeAll(accountNameList);
-                        getAllAccounts();
-                        accountListView.getItems().addAll(accountNameList);
+                        // Update ListView
+//                        accountListView.getItems().removeAll(accountNameList);
+//                        getAllAccounts();
+//                        accountListView.getItems().addAll(accountNameList);
+                        updateListView();
                         btnAddCancel.setText("Add");
                         disableFields();
                     }
@@ -141,16 +128,16 @@ public class ManagerUI implements Initializable {
 
     }
 
-    private void updateAccount(Account account){
+    public void updateAccount(Account account){
         Account result = Main.passwordManager.updateAccount(account);
         if(result != null){
             clearFields();
-            accountListView.getItems().removeAll(accountNameList);
-            getAllAccounts();
-            accountListView.getItems().addAll(accountNameList);
+            updateListView();
             btnAddCancel.setText("Add");
             disableFields();
             btnToggleEdit.setVisible(false);
+            btnDelete.setVisible(false);
+            backgroundPane.setVisible(false);
             btnToggleEdit.setSelected(false);
             btnSubmit.setLayoutX(46);
             btnSubmit.setPrefWidth(319);
@@ -158,12 +145,16 @@ public class ManagerUI implements Initializable {
         }
     }
 
+
     public void addCancel(ActionEvent event) {
         if(btnAddCancel.getText().equals("Cancel")){
             clearFields();
             btnAddCancel.setText("Add");
             disableFields();
             btnToggleEdit.setVisible(false);
+            btnDelete.setVisible(false);
+            backgroundPane.setVisible(false);
+
             btnSubmit.setLayoutX(46);
             btnSubmit.setPrefWidth(319);
             btnSubmit.setText("Save");
@@ -188,6 +179,12 @@ public class ManagerUI implements Initializable {
             toggleEditing();
             tfAccountName.setEditable(false);
         }
+    }
+
+    private void updateListView(){
+        accountListView.getItems().removeAll(accountNameList);
+        getAllAccounts();
+        accountListView.getItems().addAll(accountNameList);
     }
 
     private void toggleEditing(){
@@ -248,5 +245,77 @@ public class ManagerUI implements Initializable {
         tfPassword.setDisable(false);
         tfConfirmPassword.setDisable(false);
         btnSubmit.setDisable(false);
+    }
+
+    public void search(String searchTerm) {
+        if(searchTerm.trim().length() == 0){
+            System.out.println("Empty");
+            updateListView();
+        }else{
+            ArrayList<Account> searchAccountList = Main.passwordManager.searchAccounts(Main.loggedInUser,searchTerm);
+            if(searchAccountList.size() == 0){
+                System.out.println("size 0");
+                Main.ErrorAlert("Search","No result found");
+                tfSearch.setText("");
+                updateListView();
+            }else{
+                System.out.println("NotEmpty");
+                accountListView.getItems().removeAll(accountNameList);
+                list.clear();
+                list = searchAccountList;
+                accountNameList.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    accountNameList.add(list.get(i).getAc_name());
+                }
+                accountListView.getItems().addAll(accountNameList);
+            }
+
+        }
+    }
+
+    public void searchBox(KeyEvent keyEvent) {
+        String searchTerm = "";
+        switch (keyEvent.getCode()){
+            case ESCAPE:
+                if(tfSearch.getText().length() != 0){
+                    tfSearch.setText("");
+                    updateListView();
+                }
+                break;
+            case BACK_SPACE:
+                if(tfPassword.getText().length() != 0){
+                    searchTerm = tfSearch.getText();
+                    search(searchTerm);
+                }else{
+                    updateListView();
+                }
+                break;
+            default:
+                searchTerm = tfSearch.getText()+keyEvent.getText();
+                search(searchTerm);
+        }
+    }
+
+    public void deleteAccount(ActionEvent event) {
+        Account account = new Account(Main.loggedInUser.getUserid(),tfAccountName.getText(),tfUsername.getText(),tfPassword.getText());
+        try {
+            Account result = Main.passwordManager.deleteAccount(account);
+            if(result != null){
+                clearFields();
+                updateListView();
+                btnAddCancel.setText("Add");
+                disableFields();
+                btnToggleEdit.setVisible(false);
+                btnDelete.setVisible(false);
+                backgroundPane.setVisible(false);
+                btnToggleEdit.setSelected(false);
+                btnSubmit.setLayoutX(46);
+                btnSubmit.setPrefWidth(319);
+                btnSubmit.setText("Save");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }
     }
 }

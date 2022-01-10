@@ -26,7 +26,12 @@ public class Main extends Application {
     }
 
     public static void ErrorAlert(String title,String message){
+        double x = (double) (stage.getX() + stage.getWidth()) / 2;
+        double y= (double) (stage.getY() + stage.getHeight()) / 2;
+        System.out.println("x: " + x + ", y: " + y);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setX(x);
+        alert.setY(y);
         alert.setTitle(title);
         alert.setHeaderText(title  + " failed");
         alert.setContentText(message);
@@ -43,6 +48,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
+            primaryStage.setTitle("Password Manager");
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
