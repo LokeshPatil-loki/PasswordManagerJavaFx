@@ -74,7 +74,7 @@ public class PasswordManager {
             pst.setInt(1,account.getUserid());
             pst.setString(2,account.getAc_name());
             pst.setString(3,account.getUsername());
-            pst.setString(4,account.getPassword());
+            pst.setString(4,EncryptDecrypt.encrypt(account.getPassword()));
             int rowAffected = pst.executeUpdate();
             if(rowAffected > 0 ){
                 System.out.println("Account added to password manager successfully!");
@@ -92,7 +92,7 @@ public class PasswordManager {
         try {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1,account.getUsername());
-            pst.setString(2,account.getPassword());
+            pst.setString(2,EncryptDecrypt.encrypt(account.getPassword()));
             pst.setInt(3,account.getUserid());
             pst.setString(4,account.getAc_name());
             int rowAffected = pst.executeUpdate();
@@ -125,7 +125,7 @@ public class PasswordManager {
             while (rs.next()){
                 Account account = new Account(
                         rs.getInt(1),rs.getString(2),
-                        rs.getString(3),rs.getString(4));
+                        rs.getString(3),EncryptDecrypt.decrypt(rs.getString(4)));
                 accountArrayList.add(account);
             }
         } catch (SQLException e) {
@@ -145,7 +145,7 @@ public class PasswordManager {
             while (rs.next()){
                 Account account = new Account(
                         rs.getInt(1),rs.getString(2),
-                        rs.getString(3),rs.getString(4));
+                        rs.getString(3),EncryptDecrypt.decrypt(rs.getString(4)));
                 System.out.println(account.getAc_name());
                 accountArrayList.add(account);
             }
