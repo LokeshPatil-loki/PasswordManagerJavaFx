@@ -83,6 +83,7 @@ public class PasswordManager {
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
+            Main.ErrorAlert("Saving Account",e.getMessage());
         }
         return null;
     }

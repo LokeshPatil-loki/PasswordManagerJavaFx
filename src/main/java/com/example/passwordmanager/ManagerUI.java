@@ -60,9 +60,7 @@ public class ManagerUI implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         disableFields();
-        ContextMenu contextMenu = new ContextMenu(new MenuItem("Delete"));
         getAllAccounts();
-        ImageView imageView = new ImageView();
         try {
             accountListView.getItems().addAll(accountNameList);
         }catch (Exception e){

@@ -21,7 +21,7 @@ public class RegisterController extends AuthController{
         if(username.length() > 0 && password.trim().length() > 0){
             User user = Main.passwordManager.register(username,password);
             if(user != null){
-                Alert alert = new Alert(Alert.AlertType.NONE);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("User " + username + " is registered successfully");
                 alert.setContentText("Now try to login with your username and password");
