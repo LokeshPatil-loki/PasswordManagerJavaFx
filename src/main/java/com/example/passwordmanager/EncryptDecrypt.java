@@ -10,6 +10,7 @@ public class EncryptDecrypt {
     }
     public static String decrypt(String message){
         String result = "";
+//        ABCDE BDDFF
         byte[] byteArray = message.getBytes();
         for(int i=0;i<message.length();i++){
             result += (char)(byteArray[i] - (i % 2 == 0 ? 1 : 2));
