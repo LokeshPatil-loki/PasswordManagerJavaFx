@@ -1,7 +1,11 @@
 package com.example.passwordmanager;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import com.opencsv.CSVWriter;
 
 public class PasswordManager {
     private final String UNAME,PASS,HOST,DATABASE,URL;
@@ -15,6 +19,7 @@ public class PasswordManager {
         this.PASS = PASS;
         this.HOST = HOST;
         this.DATABASE = DATABASE;
+//        jdbc:mysql://localhost:3306/PasswordManager
         this.URL = "jdbc:mysql://"+this.HOST+"/"+DATABASE;
         con = DriverManager.getConnection(URL,UNAME,PASS);
         System.out.println("Connection created");
@@ -156,4 +161,26 @@ public class PasswordManager {
         return accountArrayList;
     }
 
+    public boolean exportToCSV(User user){
+        ArrayList<Account> accountArrayList= getAllAccounts(user);
+        if(accountArrayList.size() > 0 ){
+            File file = new File("export.csv");
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                CSVWriter csvWriter = new CSVWriter(fileWriter);
+                csvWriter.writeNext(new String[]{"UserID","Account Name","Username","Password"});
+                for(Account ac : accountArrayList){
+                    csvWriter.writeNext(ac.toStringArray());
+                }
+                csvWriter.close();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

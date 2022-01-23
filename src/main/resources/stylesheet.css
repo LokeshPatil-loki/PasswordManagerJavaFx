@@ -101,6 +101,17 @@
     -fx-background-color: #348BA7;
 }
 
-.btnLogout{
+.smallButton{
+    -fx-cursor: hand;
+    -fx-background-color: #0C475A;
+    -fx-text-fill: "#FFFFFF";
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #348BA7;
+    -fx-border-width: 3px;
+}
+
+.smallButton:hover{
+    -fx-background-color: #348BA7;
 }
 

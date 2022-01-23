@@ -5,7 +5,10 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -14,6 +17,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ public class ManagerUI implements Initializable {
     private PasswordField pfPassword, pfConfirmPassword;
 
     @FXML
-    private Button btnSubmit, btnAddCancel,btnDelete;
+    private Button btnSubmit, btnAddCancel,btnDelete,btnLogout,btnExport;
 
     @FXML
     private ToggleButton btnToggleEdit;
@@ -314,6 +318,30 @@ public class ManagerUI implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
+        }
+    }
+
+
+    public void exportToCSV(ActionEvent event) {
+        boolean isExported = Main.passwordManager.exportToCSV(Main.loggedInUser);
+        if(isExported){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Password Exported");
+            alert.show();
+        }
+    }
+
+    public void logout(ActionEvent event) {
+        Main.loggedInUser = null;
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("stylesheet.css");
+            Main.stage.setScene(scene);
+            Main.stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

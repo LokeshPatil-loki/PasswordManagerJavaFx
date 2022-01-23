@@ -6,8 +6,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -50,6 +48,8 @@
                   <Button fx:id="btnDelete" layoutX="46.0" layoutY="349.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="46.35" prefWidth="46.35" styleClass="icon-button" visible="false" />
 
                </children></Pane>
+            <Button onAction="#exportToCSV" layoutX="318.0" layoutY="57" styleClass="smallButton"  fx:id="btnExport" prefWidth="103" prefHeight="31" mnemonicParsing="false" text="Export" />
+            <Button onAction="#logout" layoutX="434" layoutY="57.0" styleClass="smallButton" fx:id="btnLogout" prefWidth="103" prefHeight="31" mnemonicParsing="false" text="Logout" />
          </children></Pane>
    </children>
 </AnchorPane>

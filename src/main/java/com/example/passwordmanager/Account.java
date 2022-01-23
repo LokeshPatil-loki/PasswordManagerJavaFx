@@ -6,17 +6,6 @@ public class Account {
     private String username;
     private String password;
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "userid=" + userid +
-                ", ac_name='" + ac_name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-
     public Account(int userid, String ac_name, String username, String password) {
         this.userid = userid;
         this.ac_name = ac_name;
@@ -54,5 +43,24 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String[] toStringArray(){
+        String strArr[] =  new String[4];
+        strArr[0] = this.userid+"";
+        strArr[1] = this.ac_name;
+        strArr[2] = this.username;
+        strArr[3] = this.password;
+        return  strArr;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "userid=" + userid +
+                ", ac_name='" + ac_name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
