@@ -17,7 +17,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try {
-            passwordManager = new PasswordManager("loki","doloris","localhost:3306","PasswordManager");
+            passwordManager = new PasswordManager("loki","loki","localhost:3306","PasswordManager");
 //            Main.loggedInUser =  passwordManager.login("loki","lokesh");
         } catch (SQLException e) {
             e.printStackTrace();
